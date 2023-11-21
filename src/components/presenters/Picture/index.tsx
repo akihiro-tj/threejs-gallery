@@ -1,9 +1,13 @@
 import { DoubleSide } from 'three';
 
-const Picture = () => {
+type PictureProps = {
+  position: [number, number, number];
+};
+
+const Picture = ({ position }: PictureProps) => {
   return (
-    <mesh>
-      <boxGeometry />
+    <mesh position={position}>
+      <planeGeometry />
       <meshNormalMaterial side={DoubleSide} />
     </mesh>
   );
