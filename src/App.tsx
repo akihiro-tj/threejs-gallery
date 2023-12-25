@@ -1,4 +1,4 @@
-import ThreeCanvas from './components/presenters/ThreeCanvas';
+import ThreeCanvas from './components/ThreeCanvas';
 
 const App = () => {
   return <ThreeCanvas />;
