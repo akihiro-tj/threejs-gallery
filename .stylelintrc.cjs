@@ -6,5 +6,7 @@ module.exports = {
   ],
   rules: {
     'block-no-empty': null,
+    'selector-pseudo-class-no-unknown': null,
+    'selector-class-pattern': null,
   },
 };

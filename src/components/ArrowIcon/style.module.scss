@@ -1,0 +1,16 @@
+.arrow {
+  padding: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: all 0.2s;
+
+  @include hover {
+    opacity: 0.8;
+  }
+}
+
+.arrow svg {
+  width: 16px;
+  height: fit-content;
+}

@@ -1,0 +1,19 @@
+.app {
+  position: relative;
+}
+
+.arrow-left,
+.arrow-right {
+  position: absolute;
+  top: 50%;
+}
+
+.arrow-left {
+  left: 32px;
+  transform: translateY(-50%);
+}
+
+.arrow-right {
+  right: 32px;
+  transform: translateY(-50%) rotate(180deg);
+}

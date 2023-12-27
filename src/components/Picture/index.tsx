@@ -5,14 +5,16 @@ import { DoubleSide } from 'three';
 
 type PictureProps = {
   url: string;
-  position: {
-    from: [number, number, number];
-    to: [number, number, number];
-  };
   scaleFactor: number;
+  from: {
+    position: [number, number, number];
+  };
+  to: {
+    position: [number, number, number];
+  };
 };
 
-const Picture = ({ url, position, scaleFactor }: PictureProps) => {
+const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
   const texture = useTexture(url);
   const { width, height } = texture.source.data;
   const scale = useAspect(width, height, scaleFactor);
@@ -20,15 +22,8 @@ const Picture = ({ url, position, scaleFactor }: PictureProps) => {
   const [springs, api] = useSpring(() => ({}));
 
   useEffect(() => {
-    api.start({
-      from: {
-        position: position.from,
-      },
-      to: {
-        position: position.to,
-      },
-    });
-  }, [api, position]);
+    api.start({ from, to });
+  }, [api, from, to]);
 
   return (
     <animated.mesh position={springs.position} scale={scale}>
