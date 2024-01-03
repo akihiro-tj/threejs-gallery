@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { Picture as TPicture } from '../../types';
 import Picture from '../Picture';
 
+//
 type CanvasContentProps = {
   pictures: TPicture[];
   scaleFactor: number;
@@ -36,10 +37,19 @@ const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   );
 };
 
-const ThreeCanvas = (props: CanvasContentProps) => {
+//
+type ThreeCanvasProps = {
+  className?: string;
+} & CanvasContentProps;
+
+const ThreeCanvas = ({
+  className,
+  pictures,
+  scaleFactor,
+}: ThreeCanvasProps) => {
   return (
-    <Canvas>
-      <CanvasContent {...props} />
+    <Canvas className={className}>
+      <CanvasContent pictures={pictures} scaleFactor={scaleFactor} />
     </Canvas>
   );
 };

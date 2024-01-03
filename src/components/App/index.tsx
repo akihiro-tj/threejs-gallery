@@ -7,11 +7,11 @@ import ThreeCanvas from '../ThreeCanvas';
 import style from './style.module.scss';
 
 const RADIUS = 2;
-const SCALE_FACTOR = 0.15;
+const SCALE_FACTOR = 0.23;
 
 const POSITIONS = [
   [RADIUS * Math.cos(0), 0, 0],
-  [0, 0, RADIUS * 1.5 * Math.sin(Math.PI / 2)],
+  [0, 0, RADIUS * Math.sin(Math.PI / 2)],
   [RADIUS * Math.cos(Math.PI), 0, 0],
 ] as Position[];
 
@@ -84,7 +84,13 @@ const App = () => {
 
   return (
     <div className={style.app}>
-      <ThreeCanvas pictures={pictures} scaleFactor={SCALE_FACTOR} />
+      <div className={style.canvasContainer}>
+        <ThreeCanvas
+          className={style.threeCanvas}
+          pictures={pictures}
+          scaleFactor={SCALE_FACTOR}
+        />
+      </div>
       <ArrowIcon className={style.arrowLeft} onClick={handleArrowLeftClick} />
       <ArrowIcon className={style.arrowRight} onClick={handleArrowRightClick} />
     </div>

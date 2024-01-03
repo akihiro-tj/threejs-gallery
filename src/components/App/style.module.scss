@@ -1,19 +1,45 @@
+.app,
+.canvas-container {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
 .app {
   position: relative;
+  display: grid;
+  grid-template-rows: 0.5fr auto 0.5fr;
+  grid-template-columns: 0.5fr 8px auto auto auto 8px 0.5fr;
+  background-color: #111;
+}
+
+.canvas-container {
+  z-index: var(--z-canvas);
+  grid-row: 1 / -1;
+  grid-column: 2 / -2;
+  max-width: var(--canvas-width);
+  overflow: hidden;
+}
+
+.three-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--canvas-width) !important;
+  height: var(--canvas-height) !important;
+  transform: translate(-50%, -50%);
 }
 
 .arrow-left,
 .arrow-right {
-  position: absolute;
-  top: 50%;
+  z-index: var(--z-arrow);
+  grid-row: 2 / -2;
 }
 
 .arrow-left {
-  left: 32px;
-  transform: translateY(-50%);
+  grid-column: 3 / 4;
 }
 
 .arrow-right {
-  right: 32px;
-  transform: translateY(-50%) rotate(180deg);
+  grid-column: 5 / 6;
+  transform: rotate(180deg);
 }
