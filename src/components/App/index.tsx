@@ -1,53 +1,39 @@
 import { MouseEventHandler, useCallback, useState } from 'react';
 
-import { Picture } from '../../types';
+import { Direction, Picture, Position } from '../../types';
 import ArrowIcon from '../ArrowIcon';
 import ThreeCanvas from '../ThreeCanvas';
 
 import style from './style.module.scss';
 
 const RADIUS = 2;
+const SCALE_FACTOR = 0.15;
 
 const POSITIONS = [
   [RADIUS * Math.cos(0), 0, 0],
   [0, 0, RADIUS * 1.5 * Math.sin(Math.PI / 2)],
   [RADIUS * Math.cos(Math.PI), 0, 0],
-] as [number, number, number][];
+] as Position[];
 
 const PICTURES: Picture[] = [
   {
     id: 'morning',
-    from: {
-      position: POSITIONS[2],
-    },
-    to: {
-      position: POSITIONS[0],
-    },
+    from: { position: POSITIONS[2] },
+    to: { position: POSITIONS[0] },
   },
   {
     id: 'noon',
-    from: {
-      position: POSITIONS[0],
-    },
-    to: {
-      position: POSITIONS[1],
-    },
+    from: { position: POSITIONS[0] },
+    to: { position: POSITIONS[1] },
   },
   {
     id: 'sunset',
-    from: {
-      position: POSITIONS[1],
-    },
-    to: {
-      position: POSITIONS[2],
-    },
+    from: { position: POSITIONS[1] },
+    to: { position: POSITIONS[2] },
   },
 ];
 
-const getPosition = (
-  currentPosition: [number, number, number],
-  direction: 'left' | 'right',
-) => {
+const calcPosition = (currentPosition: Position, direction: Direction) => {
   const fromIndex = POSITIONS.findIndex(
     position => position === currentPosition,
   );
@@ -69,25 +55,21 @@ const getPosition = (
   }
 
   return {
-    from: {
-      position: POSITIONS[fromIndex],
-    },
-    to: {
-      position: POSITIONS[toIndex],
-    },
+    from: { position: POSITIONS[fromIndex] },
+    to: { position: POSITIONS[toIndex] },
   };
 };
 
 const App = () => {
   const [pictures, setPictures] = useState(PICTURES);
 
-  const transformPosition = useCallback((direction: 'left' | 'right') => {
-    setPictures(prev => {
-      return prev.map(picture => ({
+  const transformPosition = useCallback((direction: Direction) => {
+    setPictures(prev =>
+      prev.map(picture => ({
         ...picture,
-        ...getPosition(picture.to.position, direction),
-      }));
-    });
+        ...calcPosition(picture.to.position, direction),
+      })),
+    );
   }, []);
 
   const handleArrowLeftClick: MouseEventHandler<HTMLButtonElement> =
@@ -102,7 +84,7 @@ const App = () => {
 
   return (
     <div className={style.app}>
-      <ThreeCanvas pictures={pictures} />
+      <ThreeCanvas pictures={pictures} scaleFactor={SCALE_FACTOR} />
       <ArrowIcon className={style.arrowLeft} onClick={handleArrowLeftClick} />
       <ArrowIcon className={style.arrowRight} onClick={handleArrowRightClick} />
     </div>

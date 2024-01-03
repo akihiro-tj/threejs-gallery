@@ -3,15 +3,13 @@ import { useAspect, useTexture } from '@react-three/drei';
 import { useEffect } from 'react';
 import { DoubleSide } from 'three';
 
+import { Attribute } from '../../types';
+
 type PictureProps = {
   url: string;
   scaleFactor: number;
-  from: {
-    position: [number, number, number];
-  };
-  to: {
-    position: [number, number, number];
-  };
+  from: Attribute;
+  to: Attribute;
 };
 
 const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
@@ -19,14 +17,14 @@ const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
   const { width, height } = texture.source.data;
   const scale = useAspect(width, height, scaleFactor);
 
-  const [springs, api] = useSpring(() => ({}));
+  const [{ position }, api] = useSpring<Attribute>(() => ({}));
 
   useEffect(() => {
     api.start({ from, to });
   }, [api, from, to]);
 
   return (
-    <animated.mesh position={springs.position} scale={scale}>
+    <animated.mesh position={position} scale={scale}>
       <planeGeometry />
       <meshStandardMaterial side={DoubleSide} map={texture} />
     </animated.mesh>

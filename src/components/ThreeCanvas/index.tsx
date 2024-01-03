@@ -4,13 +4,12 @@ import { Canvas } from '@react-three/fiber';
 import { Picture as TPicture } from '../../types';
 import Picture from '../Picture';
 
-const SCALE_FACTOR = 0.15;
-
 type CanvasContentProps = {
   pictures: TPicture[];
+  scaleFactor: number;
 };
 
-const CanvasContent = ({ pictures }: CanvasContentProps) => {
+const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   return (
     <>
       {import.meta.env.DEV && (
@@ -28,7 +27,7 @@ const CanvasContent = ({ pictures }: CanvasContentProps) => {
         <Picture
           key={id}
           url={`./img/${id}.jpeg`}
-          scaleFactor={SCALE_FACTOR}
+          scaleFactor={scaleFactor}
           from={from}
           to={to}
         />

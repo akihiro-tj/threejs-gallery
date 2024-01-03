@@ -1,9 +1,12 @@
+export type Position = [number, number, number];
+export type Direction = 'left' | 'right';
+
+export type Attribute = {
+  position: Position;
+};
+
 export type Picture = {
   id: string;
-  from: {
-    position: [number, number, number];
-  };
-  to: {
-    position: [number, number, number];
-  };
+  from: Attribute;
+  to: Attribute;
 };
