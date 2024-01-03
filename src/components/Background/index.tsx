@@ -19,6 +19,7 @@ const Background = ({ picture }: BackgroundProps) => {
     from: { backgroundColor: 'rgb(0 0 0 / 90%)' },
     enter: { backgroundColor: 'rgb(0 0 0 / 80%)' },
     leave: { backgroundColor: 'rgb(0 0 0 / 90%)' },
+    config: { duration: 700 },
   });
 
   useEffect(() => {

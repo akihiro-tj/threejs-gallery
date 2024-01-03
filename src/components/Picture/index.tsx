@@ -21,7 +21,11 @@ const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
   const [{ position }, api] = useSpring<Attribute>(() => ({}));
 
   useEffect(() => {
-    api.start({ immediate: !hasInitialized.current, from, to });
+    api.start({
+      immediate: !hasInitialized.current,
+      from,
+      to,
+    });
     hasInitialized.current = true;
   }, [api, from, to]);
 
