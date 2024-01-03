@@ -1,5 +1,5 @@
-import { animated } from '@react-spring/web';
-import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
+import { animated, useSpring } from '@react-spring/web';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Direction, Picture, Position } from '../../types';
 import ArrowIcon from '../ArrowIcon';
@@ -10,92 +10,87 @@ import style from './style.module.scss';
 const RADIUS = 2;
 const SCALE_FACTOR = 0.23;
 
-const POSITIONS = [
-  [RADIUS * Math.cos(0), 0, 0],
-  [0, 0, RADIUS * Math.sin(Math.PI / 2)],
-  [RADIUS * Math.cos(Math.PI), 0, 0],
-] as Position[];
+const POSITIONS = {
+  RIGHT: [RADIUS * Math.cos(0), 0, 0] as Position,
+  CENTER: [0, 0, RADIUS * Math.sin(Math.PI / 2)] as Position,
+  LEFT: [RADIUS * Math.cos(Math.PI), 0, 0] as Position,
+};
 
 const PICTURES: Picture[] = [
   {
     id: 'morning',
-    from: { position: POSITIONS[2] },
-    to: { position: POSITIONS[0] },
+    from: { position: POSITIONS.LEFT },
+    to: { position: POSITIONS.RIGHT },
   },
   {
     id: 'noon',
-    from: { position: POSITIONS[0] },
-    to: { position: POSITIONS[1] },
+    from: { position: POSITIONS.RIGHT },
+    to: { position: POSITIONS.CENTER },
   },
   {
     id: 'sunset',
-    from: { position: POSITIONS[1] },
-    to: { position: POSITIONS[2] },
+    from: { position: POSITIONS.CENTER },
+    to: { position: POSITIONS.LEFT },
   },
 ];
 
-const calcPosition = (currentPosition: Position, direction: Direction) => {
-  const fromIndex = POSITIONS.findIndex(
-    position => position === currentPosition,
-  );
-
-  let toIndex: number;
-  switch (direction) {
-    case 'left': {
-      toIndex = fromIndex + 1 < POSITIONS.length ? fromIndex + 1 : 0;
-      break;
-    }
-    case 'right': {
-      toIndex = fromIndex - 1 > -1 ? fromIndex - 1 : POSITIONS.length - 1;
-      break;
-    }
-    default: {
-      toIndex = NaN;
-      break;
-    }
-  }
-
-  return {
-    from: { position: POSITIONS[fromIndex] },
-    to: { position: POSITIONS[toIndex] },
-  };
-};
+const positionValues = Object.values(POSITIONS);
 
 const App = () => {
   const [pictures, setPictures] = useState(PICTURES);
 
-  const centerPicture = useMemo(
-    () =>
-      pictures.find(
-        ({ to: { position } }) => position === POSITIONS[1],
-      ) as Picture,
-    [pictures],
+  const [{ backgroundColor }, api] = useSpring<{ backgroundColor: string }>(
+    () => ({}),
   );
 
-  const transformPosition = useCallback((direction: Direction) => {
-    setPictures(prev =>
-      prev.map(picture => ({
-        ...picture,
-        ...calcPosition(picture.to.position, direction),
-      })),
-    );
-  }, []);
+  const backgroundPicture = useMemo(() => {
+    return pictures.find(
+      ({ to: { position } }) => position === POSITIONS.CENTER,
+    ) as Picture;
+  }, [pictures]);
 
-  const handleArrowLeftClick: MouseEventHandler<HTMLButtonElement> =
-    useCallback(() => {
-      transformPosition('left');
-    }, [transformPosition]);
+  const updatePosition = useCallback(
+    (direction: Direction) => {
+      setPictures(prev => {
+        return prev.map(picture => {
+          const fromIndex = positionValues.findIndex(
+            position => position === picture.to.position,
+          );
+          const toIndex =
+            direction === 'left'
+              ? fromIndex + 1 < positionValues.length
+                ? fromIndex + 1
+                : 0
+              : fromIndex - 1 > -1
+                ? fromIndex - 1
+                : positionValues.length - 1;
 
-  const handleArrowRightClick: MouseEventHandler<HTMLButtonElement> =
-    useCallback(() => {
-      transformPosition('right');
-    }, [transformPosition]);
+          return {
+            ...picture,
+            from: { position: positionValues[fromIndex] },
+            to: { position: positionValues[toIndex] },
+          };
+        });
+      });
+
+      api.start({
+        from: { backgroundColor: 'rgb(0 0 0 / 100%)' },
+        to: { backgroundColor: 'rgb(0 0 0 / 80%)' },
+      });
+    },
+    [api],
+  );
 
   return (
-    <animated.div
-      className={style.app}
-      style={{ backgroundImage: `url("./img/${centerPicture.id}.jpeg")` }}
-    >
+    <div className={style.app}>
+      <animated.div
+        className={style.background}
+        style={{
+          backgroundColor,
+          backgroundImage: `url("./img/${backgroundPicture.id}.jpeg")`,
+        }}
+      />
+
       <div className={style.canvasContainer}>
         <ThreeCanvas
           className={style.threeCanvas}
@@ -103,9 +98,16 @@ const App = () => {
           scaleFactor={SCALE_FACTOR}
         />
       </div>
-      <ArrowIcon className={style.arrowLeft} onClick={handleArrowLeftClick} />
-      <ArrowIcon className={style.arrowRight} onClick={handleArrowRightClick} />
-    </animated.div>
+
+      <ArrowIcon
+        className={style.arrowLeft}
+        onClick={() => updatePosition('left')}
+      />
+      <ArrowIcon
+        className={style.arrowRight}
+        onClick={() => updatePosition('right')}
+      />
+    </div>
   );
 };
 

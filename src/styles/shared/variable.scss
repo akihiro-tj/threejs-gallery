@@ -5,10 +5,12 @@
   --font-family: 'Inter', 'Noto Sans JP', sans-serif;
 
   ///
-  --z-canvas: 10;
-  --z-arrow: 20;
+  --z-background: 10;
+  --z-canvas: 20;
+  --z-arrow: 30;
 
   ///
   --canvas-width: 840px;
   --canvas-height: 800px;
+  --blur-radius: 10px;
 }
