@@ -1,4 +1,5 @@
-import { MouseEventHandler, useCallback, useState } from 'react';
+import { animated } from '@react-spring/web';
+import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 
 import { Direction, Picture, Position } from '../../types';
 import ArrowIcon from '../ArrowIcon';
@@ -63,6 +64,14 @@ const calcPosition = (currentPosition: Position, direction: Direction) => {
 const App = () => {
   const [pictures, setPictures] = useState(PICTURES);
 
+  const centerPicture = useMemo(
+    () =>
+      pictures.find(
+        ({ to: { position } }) => position === POSITIONS[1],
+      ) as Picture,
+    [pictures],
+  );
+
   const transformPosition = useCallback((direction: Direction) => {
     setPictures(prev =>
       prev.map(picture => ({
@@ -83,7 +92,10 @@ const App = () => {
     }, [transformPosition]);
 
   return (
-    <div className={style.app}>
+    <animated.div
+      className={style.app}
+      style={{ backgroundImage: `url("./img/${centerPicture.id}.jpeg")` }}
+    >
       <div className={style.canvasContainer}>
         <ThreeCanvas
           className={style.threeCanvas}
@@ -93,7 +105,7 @@ const App = () => {
       </div>
       <ArrowIcon className={style.arrowLeft} onClick={handleArrowLeftClick} />
       <ArrowIcon className={style.arrowRight} onClick={handleArrowRightClick} />
-    </div>
+    </animated.div>
   );
 };
 
