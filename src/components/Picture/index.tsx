@@ -13,12 +13,11 @@ type PictureProps = {
 };
 
 const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
-  const hasInitialized = useRef(false);
-
   const texture = useTexture(url);
   const { width, height } = texture.source.data;
   const scale = useAspect(width, height, scaleFactor);
 
+  const hasInitialized = useRef(false);
   const [{ position }, api] = useSpring<Attribute>(() => ({}));
 
   useEffect(() => {
