@@ -23,9 +23,7 @@ const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
 
   useEffect(() => {
     api.start({ immediate: !hasInitialized.current, from, to });
-    if (!hasInitialized.current) {
-      hasInitialized.current = true;
-    }
+    hasInitialized.current = true;
   }, [api, from, to]);
 
   return (
