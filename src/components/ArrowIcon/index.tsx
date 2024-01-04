@@ -1,16 +1,23 @@
 import clsx from 'clsx';
 import { MouseEventHandler } from 'react';
 
+import { Direction } from '../../types';
+
 import style from './style.module.scss';
 
 type ArrowIconProps = {
   className?: string;
+  direction: Direction;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const ArrowIcon = ({ className, onClick }: ArrowIconProps) => {
+const ArrowIcon = ({ className, direction, onClick }: ArrowIconProps) => {
   return (
-    <button className={clsx(className, style.arrow)} onClick={onClick}>
+    <button
+      className={clsx(className, style.arrow, style[direction])}
+      data-direction={direction}
+      onClick={onClick}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="10"

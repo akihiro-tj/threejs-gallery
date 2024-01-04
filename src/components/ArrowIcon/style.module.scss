@@ -14,3 +14,10 @@
   width: 16px;
   height: fit-content;
 }
+
+.left {
+}
+
+.right {
+  transform: rotate(180deg);
+}

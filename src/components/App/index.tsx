@@ -1,6 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 
-import { Direction, Picture, Position } from '../../types';
+import { Picture, Position } from '../../types';
 import ArrowIcon from '../ArrowIcon';
 import Background from '../Background';
 import ThreeCanvas from '../ThreeCanvas';
@@ -45,29 +45,34 @@ const App = () => {
     ) as Picture;
   }, [pictures]);
 
-  const updatePosition = useCallback((direction: Direction) => {
-    setPictures(prev => {
-      return prev.map(picture => {
-        const fromIndex = positionValues.findIndex(
-          position => position === picture.to.position,
-        );
-        const toIndex =
-          direction === 'left'
-            ? fromIndex + 1 < positionValues.length
-              ? fromIndex + 1
-              : 0
-            : fromIndex - 1 > -1
-              ? fromIndex - 1
-              : positionValues.length - 1;
+  const updatePosition: MouseEventHandler<HTMLButtonElement> = useCallback(
+    event => {
+      const direction = event.currentTarget.getAttribute('data-direction');
 
-        return {
-          ...picture,
-          from: { position: positionValues[fromIndex] },
-          to: { position: positionValues[toIndex] },
-        };
+      setPictures(pictures => {
+        return pictures.map(picture => {
+          const fromIndex = positionValues.findIndex(
+            position => position === picture.to.position,
+          );
+          const toIndex =
+            direction === 'left'
+              ? fromIndex + 1 < positionValues.length
+                ? fromIndex + 1
+                : 0
+              : fromIndex - 1 > -1
+                ? fromIndex - 1
+                : positionValues.length - 1;
+
+          return {
+            ...picture,
+            from: { position: positionValues[fromIndex] },
+            to: { position: positionValues[toIndex] },
+          };
+        });
       });
-    });
-  }, []);
+    },
+    [],
+  );
 
   return (
     <div className={style.app}>
@@ -83,11 +88,13 @@ const App = () => {
 
       <ArrowIcon
         className={style.arrowLeft}
-        onClick={() => updatePosition('left')}
+        direction="left"
+        onClick={updatePosition}
       />
       <ArrowIcon
         className={style.arrowRight}
-        onClick={() => updatePosition('right')}
+        direction="right"
+        onClick={updatePosition}
       />
     </div>
   );
