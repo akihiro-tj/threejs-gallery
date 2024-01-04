@@ -15,11 +15,10 @@ const Background = ({ picture }: BackgroundProps) => {
   return transitions(({ backgroundColor }, { id }) => (
     <animated.div
       className={style.background}
-      style={{
-        backgroundColor,
-        backgroundImage: `url("./img/${id}.jpeg")`,
-      }}
-    />
+      style={{ backgroundImage: `url("./img/${id}.jpeg")` }}
+    >
+      <animated.div className={style.overlay} style={{ backgroundColor }} />
+    </animated.div>
   ));
 };
 

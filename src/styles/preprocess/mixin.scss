@@ -6,6 +6,18 @@
   }
 }
 
+@mixin mq-landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mq-portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
 @mixin mq-tablet {
   @media (width < 840px) {
     @content;
