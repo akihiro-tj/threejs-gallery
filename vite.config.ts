@@ -22,8 +22,8 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "/src/styles/shared";',
-        includePaths: ['src/styles'],
+        additionalData: '@use "/src/styles/preprocess" as *;',
+        includePaths: ['/src/styles'],
       },
     },
     postcss: {
