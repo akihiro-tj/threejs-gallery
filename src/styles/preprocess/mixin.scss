@@ -5,3 +5,15 @@
     }
   }
 }
+
+@mixin mq-tablet {
+  @media (width < 840px) {
+    @content;
+  }
+}
+
+@mixin mq-laptop {
+  @media (width < 1480px) {
+    @content;
+  }
+}

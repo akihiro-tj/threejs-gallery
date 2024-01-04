@@ -1,8 +1,8 @@
 import { Picture, PictureAttributes } from '../types';
 import { radian } from '../utils';
 
-export const RADIUS = 1.8;
-export const SCALE_FACTOR = 0.23;
+export const RADIUS = 2;
+export const SCALE_FACTOR = 0.25;
 export const OVERLAY_OPACITY = {
   VISIBLE: 0.3,
   HIDDEN: 0,
