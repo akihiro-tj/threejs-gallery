@@ -4,9 +4,10 @@ export type Position = [x: number, y: number, z: number];
 export type Rotation = [x: number, y: number, z: number];
 
 export type PictureAttribute = {
-  id: 'right' | 'center' | 'left';
+  positionID: 'right' | 'center' | 'left';
   position: Position;
   rotation: Rotation;
+  overlayOpacity: number;
 };
 
 export type PictureAttributes = {

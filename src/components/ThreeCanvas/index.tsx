@@ -1,4 +1,4 @@
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
 import { Picture as TPicture } from '../../types';
@@ -13,14 +13,6 @@ type CanvasContentProps = {
 const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   return (
     <>
-      {import.meta.env.DEV && (
-        <>
-          <gridHelper />
-          <axesHelper args={[5]} />
-          <OrbitControls />
-        </>
-      )}
-
       <PerspectiveCamera position={[0, 0, 6]} makeDefault />
       <ambientLight />
 

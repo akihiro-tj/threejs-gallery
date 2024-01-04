@@ -1,5 +1,5 @@
 import { animated } from '@react-spring/three';
-import { DoubleSide } from 'three';
+import { Color, DoubleSide } from 'three';
 
 import { PictureAttribute } from '../../types';
 
@@ -13,7 +13,7 @@ type PictureProps = {
 };
 
 const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
-  const { texture, scale, position, rotation } = usePicture(
+  const { texture, scale, position, rotation, overlayOpacity } = usePicture(
     url,
     scaleFactor,
     from,
@@ -21,10 +21,30 @@ const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
   );
 
   return (
-    <animated.mesh scale={scale} position={position} rotation={rotation as any}>
-      <planeGeometry />
-      <meshStandardMaterial side={DoubleSide} map={texture} />
-    </animated.mesh>
+    <>
+      <animated.mesh
+        scale={scale}
+        position={position}
+        rotation={rotation as any}
+      >
+        <planeGeometry />
+        <meshStandardMaterial side={DoubleSide} map={texture} />
+      </animated.mesh>
+      <animated.mesh
+        scale={scale}
+        position={position}
+        rotation={rotation as any}
+      >
+        <planeGeometry />
+        {/* @ts-ignore */}
+        <animated.meshStandardMaterial
+          side={DoubleSide}
+          color={Color.NAMES.black}
+          transparent
+          opacity={overlayOpacity}
+        />
+      </animated.mesh>
+    </>
   );
 };
 

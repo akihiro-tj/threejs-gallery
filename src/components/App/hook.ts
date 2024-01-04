@@ -15,7 +15,8 @@ const useApp = (
 
   const backgroundPicture = useMemo(() => {
     return pictures.find(
-      ({ to: { id } }) => id === pictureAttributes.CENTER.id,
+      ({ to: { positionID } }) =>
+        positionID === pictureAttributes.CENTER.positionID,
     ) as Picture;
   }, [pictures, pictureAttributes]);
 
@@ -26,7 +27,7 @@ const useApp = (
       setPictures(pictures => {
         return pictures.map(picture => {
           const fromIndex = attributeValues.findIndex(
-            ({ id }) => id === picture.to.id,
+            ({ positionID }) => positionID === picture.to.positionID,
           );
           const toIndex =
             direction === 'left'
