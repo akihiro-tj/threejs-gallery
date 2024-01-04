@@ -16,10 +16,10 @@ const Background = ({ picture }: BackgroundProps) => {
   const transitions = useTransition(picture, {
     ref: transRef,
     immediate: !hasInitialized.current,
-    from: { backgroundColor: 'rgb(0 0 0 / 90%)' },
-    enter: { backgroundColor: 'rgb(0 0 0 / 80%)' },
-    leave: { backgroundColor: 'rgb(0 0 0 / 90%)' },
-    config: { duration: 700 },
+    from: { backgroundColor: 'rgb(0 0 0 / 80%)' },
+    enter: { backgroundColor: 'rgb(0 0 0 / 70%)' },
+    leave: { backgroundColor: 'rgb(0 0 0 / 80%)' },
+    config: { duration: 500 },
   });
 
   useEffect(() => {
