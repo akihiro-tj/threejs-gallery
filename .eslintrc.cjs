@@ -22,6 +22,7 @@ module.exports = {
     'react/no-unknown-property': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'import/order': [
       'warn',
       {

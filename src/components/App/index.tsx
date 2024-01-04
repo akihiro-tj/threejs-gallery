@@ -1,4 +1,8 @@
-import { INITIAL_PICTURES, POSITIONS, SCALE_FACTOR } from '../../configs';
+import {
+  INITIAL_PICTURES,
+  PICTURE_ATTRIBUTES,
+  SCALE_FACTOR,
+} from '../../configs';
 import ArrowIcon from '../ArrowIcon';
 import Background from '../Background';
 import ThreeCanvas from '../ThreeCanvas';
@@ -9,7 +13,7 @@ import style from './style.module.scss';
 const App = () => {
   const { pictures, backgroundPicture, updatePosition } = useApp(
     INITIAL_PICTURES,
-    POSITIONS,
+    PICTURE_ATTRIBUTES,
   );
 
   return (

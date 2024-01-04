@@ -15,7 +15,7 @@ const usePicture = (
   const scale = useAspect(width, height, scaleFactor);
 
   const hasInitialized = useRef(false);
-  const [{ position }, api] = useSpring<PictureAttribute>(() => ({}));
+  const [{ position, rotation }, api] = useSpring<PictureAttribute>(() => ({}));
 
   useEffect(() => {
     api.start({
@@ -26,7 +26,7 @@ const usePicture = (
     hasInitialized.current = true;
   }, [api, from, to]);
 
-  return { texture, scale, position };
+  return { texture, scale, position, rotation };
 };
 
 export default usePicture;

@@ -13,10 +13,15 @@ type PictureProps = {
 };
 
 const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
-  const { texture, scale, position } = usePicture(url, scaleFactor, from, to);
+  const { texture, scale, position, rotation } = usePicture(
+    url,
+    scaleFactor,
+    from,
+    to,
+  );
 
   return (
-    <animated.mesh position={position} scale={scale}>
+    <animated.mesh scale={scale} position={position} rotation={rotation as any}>
       <planeGeometry />
       <meshStandardMaterial side={DoubleSide} map={texture} />
     </animated.mesh>

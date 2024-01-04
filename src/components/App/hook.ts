@@ -1,17 +1,23 @@
 import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 
-import { Picture, Positions } from '../../types';
+import { Picture, PictureAttributes } from '../../types';
 
-const useApp = (initialPictures: Picture[], positions: Positions) => {
+const useApp = (
+  initialPictures: Picture[],
+  pictureAttributes: PictureAttributes,
+) => {
   const [pictures, setPictures] = useState(initialPictures);
 
-  const positionValues = useMemo(() => Object.values(positions), [positions]);
+  const attributeValues = useMemo(
+    () => Object.values(pictureAttributes),
+    [pictureAttributes],
+  );
 
   const backgroundPicture = useMemo(() => {
     return pictures.find(
-      ({ to: { position } }) => position === positions.CENTER,
+      ({ to: { id } }) => id === pictureAttributes.CENTER.id,
     ) as Picture;
-  }, [pictures, positions]);
+  }, [pictures, pictureAttributes]);
 
   const updatePosition: MouseEventHandler<HTMLButtonElement> = useCallback(
     event => {
@@ -19,27 +25,27 @@ const useApp = (initialPictures: Picture[], positions: Positions) => {
 
       setPictures(pictures => {
         return pictures.map(picture => {
-          const fromIndex = positionValues.findIndex(
-            position => position === picture.to.position,
+          const fromIndex = attributeValues.findIndex(
+            ({ id }) => id === picture.to.id,
           );
           const toIndex =
             direction === 'left'
-              ? fromIndex + 1 < positionValues.length
+              ? fromIndex + 1 < attributeValues.length
                 ? fromIndex + 1
                 : 0
               : fromIndex - 1 > -1
                 ? fromIndex - 1
-                : positionValues.length - 1;
+                : attributeValues.length - 1;
 
           return {
             ...picture,
-            from: { position: positionValues[fromIndex] },
-            to: { position: positionValues[toIndex] },
+            from: attributeValues[fromIndex],
+            to: attributeValues[toIndex],
           };
         });
       });
     },
-    [positionValues],
+    [attributeValues],
   );
 
   return { pictures, backgroundPicture, updatePosition };
