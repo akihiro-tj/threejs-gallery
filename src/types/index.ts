@@ -1,12 +1,19 @@
 export type Position = [number, number, number];
+
+export type Positions = {
+  RIGHT: Position;
+  CENTER: Position;
+  LEFT: Position;
+};
+
 export type Direction = 'left' | 'right';
 
-export type Attribute = {
+export type PictureAttribute = {
   position: Position;
 };
 
 export type Picture = {
   id: string;
-  from: Attribute;
-  to: Attribute;
+  from: PictureAttribute;
+  to: PictureAttribute;
 };

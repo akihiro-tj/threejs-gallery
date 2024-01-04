@@ -1,8 +1,8 @@
-import { useTransition, animated, useSpringRef } from '@react-spring/web';
-import { useEffect, useRef } from 'react';
+import { animated } from '@react-spring/web';
 
 import { Picture } from '../../types';
 
+import useBackground from './hook';
 import style from './style.module.scss';
 
 type BackgroundProps = {
@@ -10,22 +10,7 @@ type BackgroundProps = {
 };
 
 const Background = ({ picture }: BackgroundProps) => {
-  const hasInitialized = useRef(false);
-  const transRef = useSpringRef();
-
-  const transitions = useTransition(picture, {
-    ref: transRef,
-    immediate: !hasInitialized.current,
-    from: { backgroundColor: 'rgb(0 0 0 / 80%)' },
-    enter: { backgroundColor: 'rgb(0 0 0 / 70%)' },
-    leave: { backgroundColor: 'rgb(0 0 0 / 80%)' },
-    config: { duration: 500 },
-  });
-
-  useEffect(() => {
-    transRef.start();
-    hasInitialized.current = true;
-  }, [transRef, picture]);
+  const { transitions } = useBackground(picture);
 
   return transitions(({ backgroundColor }, { id }) => (
     <animated.div
