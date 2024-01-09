@@ -1,7 +1,10 @@
-export type Direction = 'left' | 'right';
+import { Position, Rotation } from '../../components/Picture/types';
 
-export type Position = [x: number, y: number, z: number];
-export type Rotation = [x: number, y: number, z: number];
+export type Picture = {
+  id: string;
+  from: PictureAttribute;
+  to: PictureAttribute;
+};
 
 export type PictureAttribute = {
   positionID: 'right' | 'center' | 'left';
@@ -14,10 +17,4 @@ export type PictureAttributes = {
   RIGHT: PictureAttribute;
   CENTER: PictureAttribute;
   LEFT: PictureAttribute;
-};
-
-export type Picture = {
-  id: string;
-  from: PictureAttribute;
-  to: PictureAttribute;
 };

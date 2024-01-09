@@ -1,9 +1,10 @@
 import { PerspectiveCamera } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas as R3FCanvas } from '@react-three/fiber';
 
 import Picture from '../Picture';
 
-import { CanvasContentProps, ThreeCanvasProps } from './types';
+import style from './style.module.scss';
+import { CanvasContentProps, CanvasContainerProps } from './types';
 
 const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   return (
@@ -24,16 +25,18 @@ const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   );
 };
 
-const ThreeCanvas = ({
+const CanvasContainer = ({
   className,
   pictures,
   scaleFactor,
-}: ThreeCanvasProps) => {
+}: CanvasContainerProps) => {
   return (
-    <Canvas className={className}>
-      <CanvasContent pictures={pictures} scaleFactor={scaleFactor} />
-    </Canvas>
+    <div className={className}>
+      <R3FCanvas className={style.canvas}>
+        <CanvasContent pictures={pictures} scaleFactor={scaleFactor} />
+      </R3FCanvas>
+    </div>
   );
 };
 
-export default ThreeCanvas;
+export default CanvasContainer;

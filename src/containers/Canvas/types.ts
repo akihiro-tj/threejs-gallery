@@ -1,10 +1,10 @@
-import { Picture } from '../../types';
+import { Picture } from '../App/types';
 
 export type CanvasContentProps = {
   pictures: Picture[];
   scaleFactor: number;
 };
 
-export type ThreeCanvasProps = {
+export type CanvasContainerProps = {
   className?: string;
 } & CanvasContentProps;

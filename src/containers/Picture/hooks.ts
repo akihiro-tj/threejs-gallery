@@ -2,7 +2,7 @@ import { useSpring } from '@react-spring/web';
 import { useAspect, useTexture } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 
-import { PictureAttribute } from '../../types';
+import { PictureAttribute } from '../App/types';
 
 const usePicture = (
   url: string,

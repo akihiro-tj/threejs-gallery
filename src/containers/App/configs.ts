@@ -1,5 +1,6 @@
-import { Picture, PictureAttributes } from '../types';
-import { radian } from '../utils';
+import { radian } from '../../utils';
+
+import { Picture, PictureAttributes } from './types';
 
 export const RADIUS = 2;
 export const SCALE_FACTOR = 0.25;

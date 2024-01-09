@@ -1,5 +1,6 @@
-import { Picture } from '../../types';
+import { SpringValue } from '@react-spring/web';
 
 export type BackgroundProps = {
-  picture: Picture;
+  backgroundImage: string;
+  backgroundColor: SpringValue<string>;
 };

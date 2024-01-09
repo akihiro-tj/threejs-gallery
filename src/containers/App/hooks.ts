@@ -1,6 +1,6 @@
 import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 
-import { Picture, PictureAttributes } from '../../types';
+import { Picture, PictureAttributes } from './types';
 
 const useApp = (
   initialPictures: Picture[],

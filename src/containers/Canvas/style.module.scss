@@ -1,0 +1,24 @@
+.canvas {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  width: var(--canvas-width) !important;
+  height: var(--canvas-height) !important;
+  transform: translate(-50%, -50%);
+}
+
+.canvas canvas {
+  transform: scale(1.2);
+}
+
+@include mq-laptop {
+  .canvas canvas {
+    transform: scale(1);
+  }
+}
+
+@include mq-tablet {
+  .canvas canvas {
+    transform: scale(0.8);
+  }
+}
