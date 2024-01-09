@@ -1,27 +1,5 @@
-# Vite-React-TypeScript Boilerplate
+# threejs-gallery
 
-## Setup
+[main.d3ls496g97lnh3.amplifyapp.com/](main.d3ls496g97lnh3.amplifyapp.com/)
 
-```bash
-$ pnpm install
-```
-
-## Development
-
-```bash
-$ pnpm run dev
-```
-
-http://localhost:8000/
-
-## Build
-
-```bash
-$ pnpm run build
-```
-
-## Lint
-
-```bash
-$ pnpm run fix
-```
+![](https://github.com/akihiro-tj/threejs-gallery/assets/50857720/62f445dd-b5d2-4878-baf2-8a0e0fa92aaa)
