@@ -1,16 +1,8 @@
 import { animated } from '@react-spring/three';
 import { Color, DoubleSide } from 'three';
 
-import { PictureAttribute } from '../../types';
-
-import usePicture from './hook';
-
-type PictureProps = {
-  url: string;
-  scaleFactor: number;
-  from: PictureAttribute;
-  to: PictureAttribute;
-};
+import usePicture from './hooks';
+import { PictureProps } from './types';
 
 const Picture = ({ url, scaleFactor, from, to }: PictureProps) => {
   const { texture, scale, position, rotation, overlayOpacity } = usePicture(

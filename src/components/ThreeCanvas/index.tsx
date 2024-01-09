@@ -1,14 +1,9 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
-import { Picture as TPicture } from '../../types';
 import Picture from '../Picture';
 
-//
-type CanvasContentProps = {
-  pictures: TPicture[];
-  scaleFactor: number;
-};
+import { CanvasContentProps, ThreeCanvasProps } from './types';
 
 const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
   return (
@@ -28,11 +23,6 @@ const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
     </>
   );
 };
-
-//
-type ThreeCanvasProps = {
-  className?: string;
-} & CanvasContentProps;
 
 const ThreeCanvas = ({
   className,

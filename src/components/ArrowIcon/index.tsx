@@ -1,15 +1,7 @@
 import clsx from 'clsx';
-import { MouseEventHandler } from 'react';
-
-import { Direction } from '../../types';
 
 import style from './style.module.scss';
-
-type ArrowIconProps = {
-  className?: string;
-  direction: Direction;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+import { ArrowIconProps } from './types';
 
 const ArrowIcon = ({ className, direction, onClick }: ArrowIconProps) => {
   return (

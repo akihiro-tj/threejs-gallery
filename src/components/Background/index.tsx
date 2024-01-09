@@ -1,13 +1,8 @@
 import { animated } from '@react-spring/web';
 
-import { Picture } from '../../types';
-
-import useBackground from './hook';
+import useBackground from './hooks';
 import style from './style.module.scss';
-
-type BackgroundProps = {
-  picture: Picture;
-};
+import { BackgroundProps } from './types';
 
 const Background = ({ picture }: BackgroundProps) => {
   const { transitions } = useBackground(picture);

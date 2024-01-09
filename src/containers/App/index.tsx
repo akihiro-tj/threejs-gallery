@@ -1,13 +1,13 @@
+import ArrowIcon from '../../components/ArrowIcon';
+import Background from '../../components/Background';
+import ThreeCanvas from '../../components/ThreeCanvas';
 import {
   INITIAL_PICTURES,
   PICTURE_ATTRIBUTES,
   SCALE_FACTOR,
 } from '../../configs';
-import ArrowIcon from '../ArrowIcon';
-import Background from '../Background';
-import ThreeCanvas from '../ThreeCanvas';
 
-import useApp from './hook';
+import useApp from './hooks';
 import style from './style.module.scss';
 
 const App = () => {
