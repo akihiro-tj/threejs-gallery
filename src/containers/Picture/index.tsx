@@ -6,10 +6,17 @@ import { PictureContainerProps } from './types';
 const PictureContainer = ({
   url,
   scaleFactor,
-  from,
-  to,
+  position,
+  rotation,
+  overlayOpacity,
 }: PictureContainerProps) => {
-  const pictureProps = usePicture(url, scaleFactor, from, to);
+  const { pictureProps } = usePicture(
+    url,
+    scaleFactor,
+    position,
+    rotation,
+    overlayOpacity,
+  );
 
   return <Picture {...pictureProps} />;
 };

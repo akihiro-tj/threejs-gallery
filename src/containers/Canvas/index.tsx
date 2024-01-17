@@ -1,7 +1,7 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas as R3FCanvas } from '@react-three/fiber';
 
-import Picture from '../Picture';
+import PictureContainer from '../Picture';
 
 import style from './style.module.scss';
 import { CanvasContentProps, CanvasContainerProps } from './types';
@@ -12,13 +12,14 @@ const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
       <PerspectiveCamera position={[0, 0, 6]} makeDefault />
       <ambientLight />
 
-      {pictures.map(({ id, from, to }) => (
-        <Picture
+      {pictures.map(({ id, position, rotation, overlayOpacity }) => (
+        <PictureContainer
           key={id}
           url={`./img/${id}.jpeg`}
           scaleFactor={scaleFactor}
-          from={from}
-          to={to}
+          position={position}
+          rotation={rotation}
+          overlayOpacity={overlayOpacity}
         />
       ))}
     </>

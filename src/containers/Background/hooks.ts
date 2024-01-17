@@ -5,21 +5,21 @@ import { Picture } from '../App/types';
 
 const useBackground = (picture: Picture) => {
   const hasInitialized = useRef(false);
-  const transRef = useSpringRef();
+  const bgSpring = useSpringRef();
 
   const transitions = useTransition(picture, {
-    ref: transRef,
+    ref: bgSpring,
     immediate: !hasInitialized.current,
-    from: { backgroundColor: 'rgb(0 0 0 / 90%)' },
+    from: { backgroundColor: 'rgb(0 0 0 / 87.5%)' },
     enter: { backgroundColor: 'rgb(0 0 0 / 80%)' },
-    leave: { backgroundColor: 'rgb(0 0 0 / 90%)' },
-    config: { duration: 500 },
+    leave: { backgroundColor: 'rgb(0 0 0 / 87.5%)' },
+    config: { duration: 1000 },
   });
 
   useEffect(() => {
-    transRef.start();
+    bgSpring.start();
     hasInitialized.current = true;
-  }, [transRef, picture]);
+  }, [bgSpring, picture]);
 
   return { transitions };
 };

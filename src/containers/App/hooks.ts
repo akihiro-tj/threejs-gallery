@@ -1,55 +1,50 @@
 import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 
-import { Picture, PictureAttributes } from './types';
+import { Direction } from '../../components/ArrowIcon/types';
+
+import { PICTURE_PROPS } from './configs';
+import { Picture } from './types';
 
 const useApp = (
   initialPictures: Picture[],
-  pictureAttributes: PictureAttributes,
+  pictureProps: typeof PICTURE_PROPS,
 ) => {
   const [pictures, setPictures] = useState(initialPictures);
 
-  const attributeValues = useMemo(
-    () => Object.values(pictureAttributes),
-    [pictureAttributes],
-  );
-
   const backgroundPicture = useMemo(() => {
     return pictures.find(
-      ({ to: { positionID } }) =>
-        positionID === pictureAttributes.CENTER.positionID,
+      ({ positionID }) => positionID === pictureProps.CENTER.positionID,
     ) as Picture;
-  }, [pictures, pictureAttributes]);
+  }, [pictures, pictureProps]);
 
-  const updatePosition: MouseEventHandler<HTMLButtonElement> = useCallback(
+  const transformPictures: MouseEventHandler<HTMLButtonElement> = useCallback(
     event => {
-      const direction = event.currentTarget.getAttribute('data-direction');
+      const direction = event.currentTarget.getAttribute(
+        'data-direction',
+      ) as Direction;
+      const picturePropValues = Object.values(pictureProps);
 
-      setPictures(pictures => {
-        return pictures.map(picture => {
-          const fromIndex = attributeValues.findIndex(
-            ({ positionID }) => positionID === picture.to.positionID,
+      setPictures(pictures =>
+        pictures.map((picture): Picture => {
+          const prevIndex = picturePropValues.findIndex(
+            ({ positionID }) => positionID === picture.positionID,
           );
-          const toIndex =
-            direction === 'left'
-              ? fromIndex + 1 < attributeValues.length
-                ? fromIndex + 1
-                : 0
-              : fromIndex - 1 > -1
-                ? fromIndex - 1
-                : attributeValues.length - 1;
-
-          return {
-            ...picture,
-            from: attributeValues[fromIndex],
-            to: attributeValues[toIndex],
-          };
-        });
-      });
+          let nextIndex = -1;
+          if (direction === 'left') {
+            nextIndex = prevIndex + 1 < pictures.length ? prevIndex + 1 : 0;
+          }
+          if (direction === 'right') {
+            nextIndex =
+              prevIndex - 1 > -1 ? prevIndex - 1 : pictures.length - 1;
+          }
+          return { ...picture, ...picturePropValues[nextIndex] };
+        }),
+      );
     },
-    [attributeValues],
+    [pictureProps],
   );
 
-  return { pictures, backgroundPicture, updatePosition };
+  return { pictures, backgroundPicture, transformPictures };
 };
 
 export default useApp;

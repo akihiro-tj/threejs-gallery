@@ -1,33 +1,39 @@
-import { useSpring } from '@react-spring/web';
+import { config, useSpring } from '@react-spring/web';
 import { useAspect, useTexture } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 
-import { PictureAttribute } from '../App/types';
+import { Position, Rotation } from '../../components/Picture/types';
 
 const usePicture = (
   url: string,
   scaleFactor: number,
-  from: PictureAttribute,
-  to: PictureAttribute,
+  position: Position,
+  rotation: Rotation,
+  overlayOpacity: number,
 ) => {
   const texture = useTexture(url);
   const { width, height } = texture.source.data;
   const scale = useAspect(width, height, scaleFactor);
 
   const hasInitialized = useRef(false);
-  const [{ position, rotation, overlayOpacity }, api] =
-    useSpring<PictureAttribute>(() => ({}));
+  const [pictureProps, pictureSpring] = useSpring<{
+    position: Position;
+    rotation: Rotation;
+    overlayOpacity: number;
+  }>(() => ({}));
 
   useEffect(() => {
-    api.start({
+    pictureSpring.start({
       immediate: !hasInitialized.current,
-      from,
-      to,
+      position,
+      rotation,
+      overlayOpacity,
+      config: config.slow,
     });
     hasInitialized.current = true;
-  }, [api, from, to]);
+  }, [pictureSpring, position, rotation, overlayOpacity]);
 
-  return { texture, scale, position, rotation, overlayOpacity };
+  return { pictureProps: { texture, scale, ...pictureProps } };
 };
 
 export default usePicture;

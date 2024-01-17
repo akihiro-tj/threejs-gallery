@@ -2,14 +2,14 @@ import ArrowIcon from '../../components/ArrowIcon';
 import Background from '../Background';
 import Canvas from '../Canvas';
 
-import { INITIAL_PICTURES, PICTURE_ATTRIBUTES, SCALE_FACTOR } from './configs';
+import { INITIAL_PICTURES, PICTURE_PROPS, SCALE_FACTOR } from './configs';
 import useApp from './hooks';
 import style from './style.module.scss';
 
 const App = () => {
-  const { pictures, backgroundPicture, updatePosition } = useApp(
+  const { pictures, backgroundPicture, transformPictures } = useApp(
     INITIAL_PICTURES,
-    PICTURE_ATTRIBUTES,
+    PICTURE_PROPS,
   );
 
   return (
@@ -23,12 +23,12 @@ const App = () => {
       <ArrowIcon
         className={style.arrowLeft}
         direction="left"
-        onClick={updatePosition}
+        onClick={transformPictures}
       />
       <ArrowIcon
         className={style.arrowRight}
         direction="right"
-        onClick={updatePosition}
+        onClick={transformPictures}
       />
     </div>
   );
