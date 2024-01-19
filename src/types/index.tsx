@@ -1,4 +1,4 @@
-import { Position, Rotation } from '../../components/Picture/types';
+import { Position, Rotation } from '../components/Picture/types';
 
 export type Picture = {
   id: string;

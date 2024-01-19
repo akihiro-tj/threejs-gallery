@@ -3,20 +3,8 @@ import Picture from '../../components/Picture';
 import usePicture from './hooks';
 import { PictureContainerProps } from './types';
 
-const PictureContainer = ({
-  url,
-  scaleFactor,
-  position,
-  rotation,
-  overlayOpacity,
-}: PictureContainerProps) => {
-  const { pictureProps } = usePicture(
-    url,
-    scaleFactor,
-    position,
-    rotation,
-    overlayOpacity,
-  );
+const PictureContainer = ({ picture, scaleFactor }: PictureContainerProps) => {
+  const { pictureProps } = usePicture(picture, scaleFactor);
 
   return <Picture {...pictureProps} />;
 };

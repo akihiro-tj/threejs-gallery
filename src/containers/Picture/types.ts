@@ -1,9 +1,6 @@
-import { Position, Rotation } from '../../components/Picture/types';
+import { Picture } from '../../types';
 
 export type PictureContainerProps = {
-  url: string;
+  picture: Picture;
   scaleFactor: number;
-  position: Position;
-  rotation: Rotation;
-  overlayOpacity: number;
 };

@@ -3,15 +3,12 @@ import { useAspect, useTexture } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 
 import { Position, Rotation } from '../../components/Picture/types';
+import { Picture } from '../../types';
 
-const usePicture = (
-  url: string,
-  scaleFactor: number,
-  position: Position,
-  rotation: Rotation,
-  overlayOpacity: number,
-) => {
-  const texture = useTexture(url);
+const usePicture = (picture: Picture, scaleFactor: number) => {
+  const { id, position, rotation, overlayOpacity } = picture;
+
+  const texture = useTexture(`img/${id}.jpeg`);
   const { width, height } = texture.source.data;
   const scale = useAspect(width, height, scaleFactor);
 

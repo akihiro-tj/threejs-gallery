@@ -1,7 +1,6 @@
 import { Position, Rotation } from '../../components/Picture/types';
+import { Picture } from '../../types';
 import { radian } from '../../utils';
-
-import { Picture } from './types';
 
 export const RADIUS = 2;
 export const SCALE_FACTOR = 0.25;

@@ -1,7 +1,7 @@
 import { useSpringRef, useTransition } from '@react-spring/web';
 import { useEffect, useRef } from 'react';
 
-import { Picture } from '../App/types';
+import { Picture } from '../../types';
 
 const useBackground = (picture: Picture) => {
   const hasInitialized = useRef(false);
