@@ -2,7 +2,7 @@ import ArrowIcon from '../../components/ArrowIcon';
 import Background from '../Background';
 import Canvas from '../Canvas';
 
-import { INITIAL_PICTURES, PICTURE_PROPS, SCALE_FACTOR } from './configs';
+import { INITIAL_PICTURES, PICTURE_PROPS, SCALE_FACTOR } from './constants';
 import useApp from './hooks';
 import style from './style.module.scss';
 

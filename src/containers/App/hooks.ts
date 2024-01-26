@@ -3,7 +3,7 @@ import { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { Direction } from '../../components/ArrowIcon/types';
 import { Picture } from '../../types';
 
-import { PICTURE_PROPS } from './configs';
+import { PICTURE_PROPS } from './constants';
 
 const useApp = (
   initialPictures: Picture[],
