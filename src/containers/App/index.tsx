@@ -4,7 +4,7 @@ import Canvas from '../Canvas';
 
 import { INITIAL_PICTURES, PICTURE_PROPS, SCALE_FACTOR } from './constants';
 import useApp from './hooks';
-import style from './style.module.scss';
+import styles from './style.module.scss';
 
 const App = () => {
   const { pictures, backgroundPicture, transformPictures } = useApp(
@@ -13,20 +13,20 @@ const App = () => {
   );
 
   return (
-    <div className={style.app}>
+    <div className={styles.app}>
       <Background picture={backgroundPicture} />
       <Canvas
-        className={style.canvas}
+        className={styles.canvas}
         pictures={pictures}
         scaleFactor={SCALE_FACTOR}
       />
       <ArrowIcon
-        className={style.arrowLeft}
+        className={styles.arrowLeft}
         direction="left"
         onClick={transformPictures}
       />
       <ArrowIcon
-        className={style.arrowRight}
+        className={styles.arrowRight}
         direction="right"
         onClick={transformPictures}
       />

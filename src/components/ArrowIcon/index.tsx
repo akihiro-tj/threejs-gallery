@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 
-import style from './style.module.scss';
+import styles from './style.module.scss';
 import { ArrowIconProps } from './types';
 
 const ArrowIcon = ({ className, direction, onClick }: ArrowIconProps) => {
   return (
     <button
-      className={clsx(className, style.arrow, style[direction])}
+      className={clsx(className, styles.arrow, styles[direction])}
       data-direction={direction}
       onClick={onClick}
     >

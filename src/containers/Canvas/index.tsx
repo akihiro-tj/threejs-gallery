@@ -3,7 +3,7 @@ import { Canvas as R3FCanvas } from '@react-three/fiber';
 
 import Picture from '../Picture';
 
-import style from './style.module.scss';
+import styles from './style.module.scss';
 import { CanvasContentProps, CanvasContainerProps } from './types';
 
 const CanvasContent = ({ pictures, scaleFactor }: CanvasContentProps) => {
@@ -26,7 +26,7 @@ const CanvasContainer = ({
 }: CanvasContainerProps) => {
   return (
     <div className={className}>
-      <R3FCanvas className={style.canvas}>
+      <R3FCanvas className={styles.canvas}>
         <CanvasContent pictures={pictures} scaleFactor={scaleFactor} />
       </R3FCanvas>
     </div>
