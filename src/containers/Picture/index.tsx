@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import Picture from '../../components/Picture';
 
 import usePicture from './hooks';
 import { PictureContainerProps } from './types';
 
-const PictureContainer: FunctionComponent<PictureContainerProps> = ({
+const PictureContainer: FC<PictureContainerProps> = ({
   picture,
   scaleFactor,
 }) => {

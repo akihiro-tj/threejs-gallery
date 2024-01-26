@@ -1,16 +1,13 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas as R3FCanvas } from '@react-three/fiber';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import Picture from '../Picture';
 
 import styles from './style.module.scss';
 import { CanvasContentProps, CanvasContainerProps } from './types';
 
-const CanvasContent: FunctionComponent<CanvasContentProps> = ({
-  pictures,
-  scaleFactor,
-}) => {
+const CanvasContent: FC<CanvasContentProps> = ({ pictures, scaleFactor }) => {
   return (
     <>
       <PerspectiveCamera position={[0, 0, 6]} makeDefault />
@@ -23,7 +20,7 @@ const CanvasContent: FunctionComponent<CanvasContentProps> = ({
   );
 };
 
-const CanvasContainer: FunctionComponent<CanvasContainerProps> = ({
+const CanvasContainer: FC<CanvasContainerProps> = ({
   className,
   pictures,
   scaleFactor,

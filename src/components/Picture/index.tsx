@@ -1,10 +1,10 @@
 import { animated } from '@react-spring/three';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Color, DoubleSide } from 'three';
 
 import { PictureProps } from './types';
 
-const Picture: FunctionComponent<PictureProps> = ({
+const Picture: FC<PictureProps> = ({
   texture,
   scale,
   position,

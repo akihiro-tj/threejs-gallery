@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import ArrowIcon from '../../components/ArrowIcon';
 import Background from '../Background';
@@ -8,7 +8,7 @@ import { INITIAL_PICTURES, PICTURE_PROPS, SCALE_FACTOR } from './constants';
 import useApp from './hooks';
 import styles from './style.module.scss';
 
-const App: FunctionComponent = () => {
+const App: FC = () => {
   const { pictures, backgroundPicture, transformPictures } = useApp(
     INITIAL_PICTURES,
     PICTURE_PROPS,
