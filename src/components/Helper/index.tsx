@@ -1,6 +1,7 @@
 import { OrbitControls } from '@react-three/drei';
+import { FunctionComponent } from 'react';
 
-const Helper = () => {
+const Helper: FunctionComponent = () => {
   return (
     <>
       {import.meta.env.DEV && (

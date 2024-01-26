@@ -1,15 +1,16 @@
 import { animated } from '@react-spring/three';
+import { FunctionComponent } from 'react';
 import { Color, DoubleSide } from 'three';
 
 import { PictureProps } from './types';
 
-const Picture = ({
+const Picture: FunctionComponent<PictureProps> = ({
   texture,
   scale,
   position,
   rotation,
   overlayOpacity,
-}: PictureProps) => {
+}) => {
   return (
     <>
       <animated.mesh

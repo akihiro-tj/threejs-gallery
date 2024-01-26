@@ -1,9 +1,14 @@
 import clsx from 'clsx';
+import { FunctionComponent } from 'react';
 
 import styles from './style.module.scss';
 import { ArrowIconProps } from './types';
 
-const ArrowIcon = ({ className, direction, onClick }: ArrowIconProps) => {
+const ArrowIcon: FunctionComponent<ArrowIconProps> = ({
+  className,
+  direction,
+  onClick,
+}) => {
   return (
     <button
       className={clsx(className, styles.arrow, styles[direction])}

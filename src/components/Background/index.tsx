@@ -1,9 +1,10 @@
 import { animated } from '@react-spring/web';
+import { FunctionComponent } from 'react';
 
 import styles from './style.module.scss';
 import { BackgroundProps } from './types';
 
-const Background = ({ imgURL, color }: BackgroundProps) => {
+const Background: FunctionComponent<BackgroundProps> = ({ imgURL, color }) => {
   return (
     <animated.div
       className={styles.background}
