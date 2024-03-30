@@ -2,7 +2,7 @@ import { Position, Rotation } from '../../components/Picture/types';
 import { Picture } from '../../types';
 import { radian } from '../../utils';
 
-export const RADIUS = 2;
+export const RADIUS = 1.5;
 export const SCALE_FACTOR = 0.25;
 
 export const OVERLAY_OPACITIES = {
